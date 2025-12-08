@@ -12,12 +12,17 @@ go run . -count=10
 
 ```
 ➜  ~ curl localhost:8098/
-host=pod-#0, known=(1) [pod-#0], state=map[pod-#0:map[]]%                                                                   ➜  ~ curl localhost:8098/inc/a
-host=pod-#1, key(a) = 1%                                                                                                    ➜  ~ curl localhost:8098/inc/a
-host=pod-#0, key(a) = 2%                                                                                                    ➜  ~ curl localhost:8098/inc/a
-host=pod-#6, key(a) = 3%                                                                                                    ➜  ~ curl localhost:8098/inc/a
-host=pod-#2, key(a) = 4%                                                                                                    ➜  ~ curl localhost:8098/get/a
-host=pod-#0, key(a) = 4%
+host=pod-#0, known=(1) [pod-#0], state=map[pod-#0:map[]]%
+➜  ~ curl localhost:8098/inc/a
+host=pod-#1, key(a) = 1%
+➜  ~ curl localhost:8098/inc/a
+host=pod-#0, key(a) = 2%
+➜  ~ curl localhost:8098/inc/a
+host=pod-#6, key(a) = 3%
+➜  ~ curl localhost:8098/inc/a
+host=pod-#2, key(a) = 4%
+➜  ~ curl localhost:8098/get/a
+host=pod-#0, key(a) = 4
 ```
 
 ## Command line arguments
