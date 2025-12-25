@@ -38,7 +38,7 @@ func newGMap(actor Actor) *gmap {
 func (g *gmap) Inc(key string) Delta {
 	g.mu.Lock()
 	defer g.mu.Unlock()
-	value, _ := g.state[g.me].Get(key)
+	value, _ := g.state[g.me].Peek(key)
 	value++
 	g.state[g.me].Add(key, value)
 	return Delta{
@@ -72,7 +72,7 @@ func (g *gmap) Merge(state map[Actor]map[string]int) {
 			}
 		}
 		for k, v := range kv {
-			if existing, ok := g.state[actor].Get(k); !ok || v > existing {
+			if existing, ok := g.state[actor].Peek(k); !ok || v > existing {
 				g.state[actor].Add(k, v)
 			}
 		}
@@ -92,7 +92,7 @@ func (g *gmap) State() map[Actor]map[string]int {
 	for actor, cache := range g.state {
 		result[actor] = make(map[string]int)
 		for _, k := range cache.Keys() {
-			if v, ok := cache.Get(k); ok {
+			if v, ok := cache.Peek(k); ok {
 				result[actor][k] = v
 			}
 		}

@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"encoding/gob"
-	"github.com/hashicorp/memberlist"
 	"log"
 	"net"
 	"strconv"
 	"time"
+
+	"github.com/hashicorp/memberlist"
 )
 
 type pod struct {
@@ -46,7 +47,7 @@ func newPod(name string, gossipAddr string, lb *roundRobinLb, kill <-chan struct
 			NumNodes: func() int {
 				return ml.NumMembers()
 			},
-			RetransmitMult: 3,
+			RetransmitMult: 5,
 		},
 	}
 	cfg.Delegate = po
