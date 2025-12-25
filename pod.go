@@ -65,9 +65,7 @@ func (p *pod) NotifyMsg(b []byte) {
 		log.Println(p.name, "fail to decode delta", err)
 		return
 	}
-	log.Println(p.name, "receive delta", delta)
 	p.gmap.ApplyDelta(delta)
-	log.Println(p.name, "after apply", p.gmap.State())
 }
 
 func (p *pod) GetBroadcasts(overhead, limit int) [][]byte {
@@ -87,7 +85,7 @@ func (p *pod) LocalState(join bool) []byte {
 
 func (p *pod) MergeRemoteState(buf []byte, join bool) {
 	log.Println(p.name, "merge remote state...")
-	var state map[Actor]map[string]int
+	var state map[Actor]map[string]int64
 	err := gob.NewDecoder(bytes.NewReader(buf)).Decode(&state)
 	if err != nil {
 		log.Println(p.name, "fail to decode state", err)
